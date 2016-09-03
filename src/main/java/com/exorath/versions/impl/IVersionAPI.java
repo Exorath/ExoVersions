@@ -1,9 +1,8 @@
-package com.exorath.reflection.impl;
+package com.exorath.versions.impl;
 
-import com.exorath.reflection.api.Version;
-import com.exorath.reflection.api.VersionAPI;
-import com.exorath.reflection.api.VersionHandler;
-import org.bukkit.Server;
+import com.exorath.versions.api.Version;
+import com.exorath.versions.api.VersionAPI;
+import com.exorath.versions.api.VersionHandler;
 
 import java.util.concurrent.Callable;
 
@@ -17,29 +16,25 @@ public class IVersionAPI<T extends VersionHandler> implements VersionAPI<T> {
     private T defaultHandler;
     private T versionHandler;
 
-    public IVersionAPI(Server server){
-        this.version = Version.create(server.getClass().getPackage().getName().split("\\.")[3]);
+    public IVersionAPI(Version version){
+        this.version = version;
 
     }
     @Override
     public T get() {
         if (versionHandler != null) {
             return versionHandler;
-        } else {
-            setDefaultHandlerFromCallableIfNonAssigned();
+        } else if(defaultHandler != null){
             return defaultHandler;
-        }
-    }
-
-    protected void setDefaultHandlerFromCallableIfNonAssigned() {
-        try {
-            if (defaultHandler == null)
+        } else if(defaultHandlerCallable != null){
+            try {
                 defaultHandler = defaultHandlerCallable.call();
-        } catch (Exception e) {
-            e.printStackTrace();
+                return defaultHandler;
+            } catch (Exception e) {e.printStackTrace();}
         }
-
+        return null;
     }
+
 
     @Override
     public boolean register(Version version, Callable<T> versionHandler) {
@@ -63,7 +58,7 @@ public class IVersionAPI<T extends VersionHandler> implements VersionAPI<T> {
     public void registerDefault(Callable<T> versionHandlerGetter) {
         if (versionHandler != null)
             return;
-        if (defaultHandler != null)
+        if (defaultHandler == null)
             defaultHandlerCallable = versionHandlerGetter;
     }
 

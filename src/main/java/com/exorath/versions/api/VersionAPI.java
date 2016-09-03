@@ -1,8 +1,6 @@
-package com.exorath.reflection.api;
+package com.exorath.versions.api;
 
-import com.exorath.reflection.impl.IVersionAPI;
-import org.bukkit.Server;
-
+import com.exorath.versions.impl.IVersionAPI;
 import java.util.concurrent.Callable;
 
 /**
@@ -37,14 +35,20 @@ public interface VersionAPI<T extends VersionHandler> {
     void registerDefault(Callable<T> versionHandlerGetter);
 
     /**
-     * Gets the CraftBukkit version this server is running on, most likely will be v1_10_R1.
+     * Gets the CraftBukkit version this server is running on, this is the one assigned with the {@link #create(Version)}.
      *
      * @return the CraftBukkit version this server is running on, most likely will be v1_10_R1
      */
     Version getVersion();
 
-    static <T extends  VersionHandler> VersionAPI<T> create(Server server){
-        return new IVersionAPI<T>(server);
+    /**
+     * Creates a new instance of a versionAPI that handles a specific type of handler.
+     * @param version
+     * @param <T>
+     * @return
+     */
+    static <T extends  VersionHandler> VersionAPI<T> create(Version version){
+        return new IVersionAPI<T>(version);
     }
 
 }

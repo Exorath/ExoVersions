@@ -1,6 +1,6 @@
-package com.exorath.reflection.api;
+package com.exorath.versions.api;
 
-import com.exorath.reflection.impl.IVersion;
+import com.exorath.versions.impl.IVersion;
 
 /**
  * This class represents a craftbukkit version.

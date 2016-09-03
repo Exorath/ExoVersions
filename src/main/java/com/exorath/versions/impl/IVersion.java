@@ -1,6 +1,6 @@
-package com.exorath.reflection.impl;
+package com.exorath.versions.impl;
 
-import com.exorath.reflection.api.Version;
+import com.exorath.versions.api.Version;
 
 /**
  * Created by toonsev on 8/30/2016.
