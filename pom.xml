@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.exorath</groupId>
-    <artifactId>ExoReflection</artifactId>
+    <artifactId>ExoVersions</artifactId>
     <version>1.0.1</version>
     <build>
         <plugins>
