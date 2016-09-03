@@ -1,2 +1,3 @@
 # ExoVersions
+[![](https://jitpack.io/v/Exorath/ExoVersions.svg)](https://jitpack.io/#Exorath/ExoVersions)
 Documentation coming soon...
